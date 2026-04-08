@@ -1,11 +1,9 @@
-import { generarReporte } from "./domain/generar-reporte.js";
-const asignaturas = [
-    { codigo: "DAM01", nombre: "Programación", creditos: 6 },
-    { codigo: "DAM02", nombre: "Bases de Datos", creditos: 6 }
-];
-const estado = {
-    tipo: "ACTIVA",
-    asignaturas
-};
-console.log(generarReporte(estado));
+import { obtenerRecurso } from "./services/api-client.js";
+async function main() {
+    const respuesta = await obtenerRecurso("/estudiantes/1");
+    if (respuesta.exito) {
+        console.log(respuesta.datos.nombreCompleto);
+    }
+}
+main();
 //# sourceMappingURL=index.js.map

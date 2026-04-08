@@ -1,15 +1,12 @@
-import { generarReporte } from "./domain/generar-reporte.js";
-import type { EstadoMatricula } from "./domain/types/estado-matricula.js";
-import type { Asignatura } from "./domain/types/asignatura.js";
+import { obtenerRecurso } from "./services/api-client.js";
+import type { Estudiante } from "./domain/types/estudiantes.js";
 
-const asignaturas: Asignatura[] = [
-  { codigo: "DAM01", nombre: "Programación", creditos: 6 },
-  { codigo: "DAM02", nombre: "Bases de Datos", creditos: 6 }
-];
+async function main() {
+  const respuesta = await obtenerRecurso<Estudiante>("/estudiantes/1");
 
-const estado: EstadoMatricula = {
-  tipo: "ACTIVA",
-  asignaturas
-};
+  if (respuesta.exito) {
+    console.log(respuesta.datos.nombreCompleto);
+  }
+}
 
-console.log(generarReporte(estado));
+main();
